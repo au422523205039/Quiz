@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubu & Dudu Love Quiz</title>
+<style>
+body{font-family:Arial,sans-serif;background:#ffe6f2;margin:0;padding:20px;text-align:center}
+.container{max-width:700px;margin:auto;background:white;padding:20px;border-radius:20px;box-shadow:0 0 10px rgba(0,0,0,.2)}
+img{width:100%;max-width:400px;border-radius:15px}
+.option{background:#fff0f5;padding:12px;margin:10px 0;border-radius:10px;cursor:pointer;border:1px solid #ff99c8}
+.option:hover{background:#ffd6e7}
+.progress{height:12px;background:#eee;border-radius:20px;overflow:hidden;margin-bottom:15px}
+.progress-bar{height:100%;background:#ff4d88;width:0%}
+#result{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🐻💕 How Well Do You Know Me? 💕🐼</h1>
+<img src="bubu-dudu.jpg" alt="Bubu & Dudu">
+<p>Upload your Bubu & Dudu image as <b>bubu-dudu.jpg</b> in the same GitHub repository.</p>
+<div class="progress"><div class="progress-bar" id="bar"></div></div>
+<div id="quiz"></div>
+<div id="result"><h2 id="score"></h2><h3 id="message"></h3></div>
+</div>
+<script>
+const questions=[
+{q:"What food do I like the most?",o:["Parotta","Fried Rice","Pizza"],a:1},
+{q:"What makes me angry because of your actions?",o:["Not spending time","Fake promises & lies","Forgetting my birthday"],a:1},
+{q:"What do I like the most from you?",o:["Your Efforts","Your Love","Your Gifts"],a:1},
+{q:"What do I expect from you when I'm angry?",o:["Asking Sorry","Convincing Me With Love","Ignoring Me"],a:0},
+{q:"What kind of kiss do I like?",o:["Forehead Kiss (Papa)","Neck Kiss","Cheek Kiss"],a:0},
+{q:"What actions and efforts do I like from you?",o:["Taking care of me and comforting me","Buying gifts","Posting me on social media"],a:0},
+{q:"What nickname would I love most?",o:["Chellam","Baby","Darling"],a:0},
+{q:"If I am sad, what should you do?",o:["Comfort me and listen","Leave me alone","Ignore me"],a:0},
+{q:"What kind of messages do I love?",o:["Sweet caring messages","Funny memes","One-word replies"],a:0},
+{q:"What is my dream for our future?",o:["A happy life together","Becoming rich","Travelling the world"],a:0},
+{q:"What is the biggest proof of love for me?",o:["Loyalty & honesty","Gifts","Social media posts"],a:0},
+{q:"What makes me happiest?",o:["Your care","Money","Shopping"],a:0},
+{q:"What should you do when I overthink?",o:["Reassure me","Ignore me","Laugh at me"],a:0},
+{q:"What surprise do I love?",o:["Heartfelt message","Expensive gift","Party"],a:0},
+{q:"What makes me smile instantly?",o:["Your sweet words","Chocolate","Shopping"],a:0},
+{q:"What matters most to me?",o:["Trust","Money","Looks"],a:0},
+{q:"What do I want more in our relationship?",o:["Understanding","Gifts","Selfies"],a:0},
+{q:"What would I enjoy most during a movie?",o:["Spending time together","Snacks","Movie"],a:0},
+{q:"What should you never break?",o:["My trust","My phone","My gifts"],a:0},
+{q:"What am I looking for in my future husband?",o:["Loyal, caring, loving, with a stable job and salary ₹30k–₹50k","Rich and famous","Very popular"],a:0}
+];
+let current=0,score=0;
+function loadQuestion(){
+let q=questions[current];
+document.getElementById("bar").style.width=((current/questions.length)*100)+"%";
+document.getElementById("quiz").innerHTML=`<h2>Question ${current+1} of ${questions.length}</h2><h3>${q.q}</h3>${q.o.map((x,i)=>`<div class="option" onclick="answer(${i})">${x}</div>`).join("")}`;
+}
+function answer(c){if(c===questions[current].a)score++;current++;if(current<questions.length)loadQuestion();else showResult();}
+function showResult(){
+document.getElementById("quiz").style.display="none";
+document.getElementById("bar").style.width="100%";
+document.getElementById("result").style.display="block";
+document.getElementById("score").innerHTML="❤️ Score: "+score+"/20";
+document.getElementById("message").innerHTML=score>=18?"💍 Perfect! You know me so well. You are ready to get married after getting a job! ❤️":score>=12?"🥰 You know me quite well, but there is still more to learn about me.":"💔 Bye! Break up! You didn't love me enough to know me! 🥹";
+}
+loadQuestion();
+</script>
+</body>
+</html>
